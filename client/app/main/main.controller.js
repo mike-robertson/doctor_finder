@@ -3,11 +3,7 @@
 angular.module('mrWebdesignApp')
   .controller('MainCtrl', ['$scope', '$http', 'socket', 'Auth', 'geoService', 'sunlightAPI',
     function ($scope, $http, socket, Auth, geoService, sunlightAPI) {
-    $scope.comments = [];
-    $scope.newComment = {
-      text: '',
-      name: ''
-    };
+    $scope.loading = true;
 
     // Bind the Auth functions to scope so it is easy to access in our html.
     $scope.isAdmin = Auth.isAdmin;
@@ -37,8 +33,10 @@ angular.module('mrWebdesignApp')
         $scope.repInfo = reps;
         console.log($scope.repInfo);
         $scope.repArray = reps.results;
+        $scope.loading = false;
       }, function(reason) {
         console.log('Failed: ' + reason);
+        $scope.loading = false;
         //handle the error here somehow, maybe pop up to make user enter their address
       }, function(update) {
         console.log('Update: ' + update);

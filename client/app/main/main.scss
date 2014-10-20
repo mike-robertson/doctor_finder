@@ -51,8 +51,17 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background-image: url('/hero_background.png');
+    background-image: url('/assets/images/hero_background.png');
     opacity: .33;
+}
+
+.spinner {
+    background-image: url('/assets/images/spinner.gif');
+    background-repeat: no-repeat;
+    min-width: 120px;
+    min-height: 100px;
+    display: table;
+    margin: 50px auto;
 }
 
 .footer {
