@@ -1,23 +1,26 @@
-#comment-container {
-    width: 100%;
-}
-
-.masonry-brick {
-    padding: 5px 5px;
-    width: 33%;
-    margin: 0;
-}
-
 .well {
-    margin: 0;
+    margin: 10px 0;
+    color: #2B2B2E;
 }
 
-.comment-form {
-    margin: 20px 0;
+.democrat {
+    background-color: #4046F5;
 }
 
-.comment-input {
-    margin: 10px 0px;
+.republican {
+    background-color: #FA2335;
+}
+
+.square {
+    width: 40px;
+    height: 40px;
+    display: table;
+    margin: 0 10px 0 0;
+}
+
+.well li {
+
+    list-style: none;
 }
 
 #banner {
@@ -34,10 +37,22 @@
 .hero-unit {
     position: relative;
     padding: 30px 15px;
-    color: #F5F5F5;
+    color: #2B2B2E;
     text-align: center;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
-    background: #4393B9;
+    z-index: 1;
+}
+
+.hero-unit::before {
+    position: absolute;
+    content: "";
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-image: url('/hero_background.png');
+    opacity: .33;
 }
 
 .footer {

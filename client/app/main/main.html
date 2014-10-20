@@ -2,18 +2,23 @@
 
 <header class="hero-unit" id="banner">
   <div class="container">
-    <h1>Mike Robertson</h1>
-    <h2>Web Developer</h2>
-    <h4>mjr127@case.edu</h4>
-    <h4>281.785.0978</h4>
+    <h1>Your Congress Info</h1>
+    <h4>Powered by SunlightAPI</h4>
   </div>
 </header>
 
 <div class="container">
-  <ul ng-repeat="rep in repArray">
-    <li>{{rep.first_name}} {{rep.last_name}} ({{rep.party}})</li>
-    <li>{{rep.chamber}}: {{rep.state}}<span ng-hide="rep.chamber === 'senate'"> - {{rep.district}}</span></li>
-  </ul>
+  <div class="col-lg-9">
+    <div class="well" ng-repeat="rep in repArray">
+    <ul>
+      <li>
+        <div class = "square pull-left" ng-class="{republican: rep.party === 'R', democrat: rep.party === 'D'}"></div>
+        {{rep.first_name}} {{rep.last_name}} ({{rep.party}})
+      </li>
+      <li>{{rep.chamber}}: {{rep.state}}<span ng-hide="rep.chamber === 'senate'"> - {{rep.district}}</span></li>
+    </ul>
+    </div>
+  </div>
 </div>
 
 <footer class="footer">
