@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('mrWebdesignApp')
-  .controller('MainCtrl', function ($scope, $http, socket, Auth) {
+  .controller('MainCtrl', ['$scope', '$http', 'socket', 'Auth', 'geoService', 
+    function ($scope, $http, socket, Auth, geoService) {
     $scope.comments = [];
     $scope.newComment = {
       text: '',
@@ -11,6 +12,8 @@ angular.module('mrWebdesignApp')
     // Bind the Auth functions to scope so it is easy to access in our html.
     $scope.isAdmin = Auth.isAdmin;
     $scope.isLoggedIn = Auth.isLoggedIn;
+    console.log('here goes nothing');
+    console.log(geoService);
 
     $http.get('/api/comments').success(function(comments) {
       $scope.comments = comments;
@@ -44,4 +47,4 @@ angular.module('mrWebdesignApp')
     $scope.$on('$destroy', function () {
       socket.unsyncUpdates('comment');
     });
-  });
+  }]);

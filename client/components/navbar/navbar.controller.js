@@ -6,22 +6,6 @@ angular.module('mrWebdesignApp')
         'title': 'Home',
         'link': '/',
         'subMenu': []
-      }, {
-        'title': 'Resume',
-        'link': '/resume',
-        'subMenu': []
-      }, {
-        'title': 'Portfolio',
-        'link': '/portfolio',
-        'subMenu': [{
-            'title': 'Github Page',
-            'link': 'https://github.com/mike-robertson',
-            'htmlTarget': '_blank'
-          }, {
-            'title': 'Falling Sand Game',
-            'link': '/fsg',
-            'htmlTarget': ''
-          }]
       }];
 
     $scope.isCollapsed = true;
