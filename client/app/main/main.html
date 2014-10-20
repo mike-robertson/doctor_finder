@@ -10,30 +10,10 @@
 </header>
 
 <div class="container">
-
-  <div masonry id="comment-container">
-    <div class="masonry-brick" ng-repeat="comment in comments">
-      <div class="well">
-        <span><button type="button" class="close" ng-click="deleteComment(comment)" ng-show="isAdmin()">&times;</button></span>
-        {{comment.text}}
-        <br>
-        <br>
-        <p class='text-right'>-{{comment.name}}</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-	  <form class="comment-form col-sm-8">
-	    <label>Leave your comment here!</label>
-	    <p class="form-group">
-	      <input type="text" class="comment-input form-control" placeholder="Your name" ng-model="newComment.name" ng-hide="isLoggedIn()">
-	      <input type="text" class="comment-input form-control" placeholder="Your comment" ng-model="newComment.text">
-	      <button type="submit" class="btn btn-primary comment-button" ng-click="addComment()">Comment</button>
-	    </p>
-	  </form>
-  </div>
-
+  <ul ng-repeat="rep in repArray">
+    <li>{{rep.first_name}} {{rep.last_name}} ({{rep.party}})</li>
+    <li>{{rep.chamber}}: {{rep.state}}<span ng-hide="rep.chamber === 'senate'"> - {{rep.district}}</span></li>
+  </ul>
 </div>
 
 <footer class="footer">
