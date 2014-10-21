@@ -18,8 +18,17 @@
     margin: 0 10px 0 0;
 }
 
-.well li {
+.chamber {
+    text-transform: capitalize;
+}
 
+.well ul {
+    margin: 0;
+    padding: 0;
+}
+
+.well li {
+    font-size: 30px;
     list-style: none;
 }
 
@@ -56,8 +65,9 @@
 }
 
 .spinner {
-    background-image: url('/assets/images/spinner.gif');
+    background-image: url('/assets/images/loading_gif.gif');
     background-repeat: no-repeat;
+    background-size: contain;
     min-width: 120px;
     min-height: 100px;
     display: table;

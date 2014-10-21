@@ -9,14 +9,15 @@
 
 <div class="container">
   <div class="spinner" ng-show="loading"></div>
-  <div class="col-lg-9">
+  <div class="col-lg-12">
     <div class="well" ng-repeat="rep in repArray">
     <ul>
       <li>
         <div class = "square pull-left" ng-class="{republican: rep.party === 'R', democrat: rep.party === 'D'}"></div>
         {{rep.first_name}} {{rep.last_name}} ({{rep.party}})
+        <span class="pull-right">{{rep.term_start | date : 'yyyy'}} - {{rep.term_end | date : 'yyyy'}}</span>
       </li>
-      <li>{{rep.chamber}}: {{rep.state}}<span ng-hide="rep.chamber === 'senate'"> - {{rep.district}}</span></li>
+      <li class="chamber">{{rep.chamber}}: {{rep.state}}<span ng-hide="rep.chamber === 'senate'"> - {{rep.district}}</span></li> 
     </ul>
     </div>
   </div>
