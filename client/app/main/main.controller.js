@@ -5,6 +5,30 @@ angular.module('mrWebdesignApp')
     function ($scope, $http, socket, Auth, geoService, sunlightAPI) {
     $scope.loading = true;
 
+    $scope.address = {
+      streetNo: '',
+      streetName: '',
+      city: '',
+      state: 'Alabama'
+    };
+
+    $scope.states = [
+      
+      "Alabama",      "Alaska",      "Arizona",      "Arkansas",
+      "California",      "Colorado",      "Connecticut",      "Delaware",
+      "Florida",      "Georgia",      "Hawaii",      "Idaho",
+      "Illinois",      "Indiana",      "Iowa",      "Kansas",
+      "Kentucky",      "Louisiana",      "Maine",      "Maryland",
+      "Massachusetts",      "Michigan",      "Minnesota",      "Mississippi",
+      "Missouri",      "Montana",      "Nebraska",      "Nevada",
+      "New Hampshire",      "New Jersey",      "New Mexico",      "New York",
+      "North Carolina",      "North Dakota",      "Ohio",      "Oklahoma",
+      "Oregon",      "Pennsylvania",      "Rhode Island",      "South Carolina",
+      "South Dakota",      "Tennessee",      "Texas",      "Utah",
+      "Vermont",      "Virginia",      "Washington",      "West Virginia",
+      "Wisconsin",      "Wyoming"
+    ];
+
     // Bind the Auth functions to scope so it is easy to access in our html.
     $scope.isAdmin = Auth.isAdmin;
     $scope.isLoggedIn = Auth.isLoggedIn;
@@ -43,37 +67,11 @@ angular.module('mrWebdesignApp')
       });
     });
 
+    $scope.setState = function(newState) {
+      $scope.address.state = newState;
+    }
 
-    // $http.get('/api/comments').success(function(comments) {
-    //   $scope.comments = comments;
-    //   socket.syncUpdates('comment', $scope.comments);
-    // });
-
-    // $scope.addComment = function() {
-    //   if($scope.newComment.text === '') {
-    //     return;
-    //   }
-    //   // If the user is logged in, use his name. If not logged in, and no name enetered, give it an anonymous name.
-    //   if($scope.isLoggedIn()) {
-    //     $scope.newComment.name = Auth.getCurrentUser().name;
-    //   }
-    //   else if($scope.newComment.name === '') {
-    //     $scope.newComment.name = 'Anonymous User';
-    //   }
-
-    //   $http.post('/api/comments', $scope.newComment);
-    //   $scope.newComment = {
-    //     text: '',
-    //     name: ''
-    //   };
-    // };
-
-    // // This could be added back in once I figure out how to restrict this to admin.
-    // $scope.deleteComment = function(comment) {
-    //   $http.delete('/api/comments/' + comment._id);
-    // };
-
-    // $scope.$on('$destroy', function () {
-    //   socket.unsyncUpdates('comment');
-    // });
+    $scope.submitAddress = function() {
+      //do something here with the input information
+    }
   }]);

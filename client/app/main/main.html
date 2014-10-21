@@ -21,12 +21,29 @@
     </ul>
     </div>
   </div>
+
+  <div class="row">
+    <form class="comment-form col-lg-4">
+      <label>Wrong info or away from home? Enter your address here</label>
+      <p class="form-group">
+        <input type="number"  class="comment-input form-control" placeholder="123" ng-model="address.streetNo">
+        <input type="text" class="comment-input form-control" placeholder="Democracy Ave." ng-model="address.streetName">
+        <input type="text" class="comment-input form-control" placeholder="Cincinnati" ng-model="address.city">
+        <div class="btn-group" dropdown scrollable is-open="status.isopen">
+          <button type="button" class="btn btn-primary dropdown-toggle"> {{address.state}}
+             <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li ng-repeat="state in states"><a href="" ng-click="setState(state)">{{state}}</a></li>
+          </ul>
+        </div>
+        <button type="submit" class="btn btn-primary comment-button" ng-click="">Update</button>
+      </p>
+    </form>
+  </div>
+
 </div>
 
 <footer class="footer">
-  <div class="container">
-      <p>Contact |
-        <a href="mailto:mjr127@case.edu">mjr127@case.edu</a> | 
-         281.785.0978</p>
-  </div>
+  
 </footer>
