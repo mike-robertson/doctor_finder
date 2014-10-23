@@ -1,14 +1,23 @@
+$app-primary-color: #404040;
+$mike-btn-primary-color:              #FFF !default;
+$mike-btn-primary-bg:                 $app-primary-color !default;
+$mike-btn-primary-border:             darken($mike-btn-primary-bg, 5%) !default;
+
 .well {
     margin: 10px 0;
     color: #2B2B2E;
 }
 
+.btn-primary {
+    @include button-variant($mike-btn-primary-color, $mike-btn-primary-bg, $mike-btn-primary-border);
+}
+
 .democrat {
-    background-color: #4046F5;
+    background-color: #3333FF;
 }
 
 .republican {
-    background-color: #FA2335;
+    background-color: #FF3333;
 }
 
 .square {
@@ -72,6 +81,10 @@
     min-height: 100px;
     display: table;
     margin: 50px auto;
+}
+
+.medium-font {
+    font-size: 20px !important;
 }
 
 .form-container {

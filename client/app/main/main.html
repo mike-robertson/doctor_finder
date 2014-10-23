@@ -17,13 +17,13 @@
         {{rep.first_name}} {{rep.last_name}} ({{rep.party}})
         <span class="pull-right">{{rep.term_start | date : 'yyyy'}} - {{rep.term_end | date : 'yyyy'}}</span>
       </li>
-      <li class="chamber">{{rep.chamber}}: {{rep.state}}<span ng-hide="rep.chamber === 'senate'"> - {{rep.district}}</span></li> 
+      <li class="chamber medium-font">{{rep.chamber}}: {{rep.state}}<span ng-hide="rep.chamber === 'senate'"> - {{rep.district}}</span></li> 
     </ul>
     </div>
   </div>
   <div class="form-container col-lg-4">
     <form>
-      <label>Wrong info? Enter your address here</label>
+      <label>Wrong info? Enter your address here: </label>
       <div class="col-sm-4 no-padding-left">
         <input type="number"  class="form-control" placeholder="123" ng-model="address.streetNo">
       </div>
@@ -36,8 +36,8 @@
       <div class="col-sm-6 no-padding-left">
         <input type="text" ng-model="address.state" placeholder="Ohio" typeahead="state for state in states | filter:$viewValue" class="form-control">
       </div>
-      <div class="col-sm-6 no-padding-left">
-        <button type="submit" class="btn btn-primary comment-button" ng-click="updateLocation()">Update</button>
+      <div class="col-sm-12 no-padding-left">
+        <button type="submit" class="btn btn-primary col-sm-12" ng-click="updateLocation()">Update</button>
       </div>
     </form>
   </div>
