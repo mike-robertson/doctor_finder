@@ -9,7 +9,7 @@ angular.module('mrWebdesignApp')
       streetNo: '',
       streetName: '',
       city: '',
-      state: 'Alabama'    
+      state: ''    
     };
 
 
@@ -89,15 +89,16 @@ angular.module('mrWebdesignApp')
           });
         }
         // Reset the address to a blank template again.
-        $scope.address = {
-          streetNo: '',
-          streetName: '',
-          city: '',
-          state: 'Alabama'
-        };
+        // Removed for now because it's annoying more than it's helpful.
+        // $scope.address = {
+        //   streetNo: '',
+        //   streetName: '',
+        //   city: '',
+        //   state: 'Alabama'
+        // };
       });
     };
-    
+
     $scope.states = [      
       "Alabama",      "Alaska",      "Arizona",      "Arkansas",
       "California",      "Colorado",      "Connecticut",      "Delaware",
