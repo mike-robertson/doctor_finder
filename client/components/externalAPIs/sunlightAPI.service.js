@@ -16,6 +16,8 @@ angular.module('mrWebdesignApp')
 		    deferred.notify('getting representatives and senators now...');
 
 		    $http.get(url).success(function(repInfo) {
+		    	console.log('success in the api');
+		    	console.log(repInfo);
 				  deferred.resolve(repInfo);
 		    });
 			  return deferred.promise;
