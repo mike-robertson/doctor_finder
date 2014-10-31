@@ -1,47 +1,29 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<header class="hero-unit" id="banner">
-  <div class="container">
-    <h1>Your Congress Info</h1>
-    <h4>Powered by SunlightAPI</h4>
-  </div>
-</header>
 
 <div class="container">
-  <div class="col-lg-8">
-    <div class="spinner" ng-show="loading"></div>
-    <div class="well" ng-repeat="rep in repArray">
-    <ul>
-      <li>
-        <div class = "square pull-left" ng-class="{republican: rep.party === 'R', democrat: rep.party === 'D'}"></div>
-        {{rep.first_name}} {{rep.last_name}} ({{rep.party}})
-        <span class="pull-right">{{rep.term_start | date : 'yyyy'}} - {{rep.term_end | date : 'yyyy'}}</span>
-      </li>
-      <li class="chamber medium-font">{{rep.chamber}}: {{rep.state}}<span ng-hide="rep.chamber === 'senate'"> - {{rep.district}}</span></li> 
-    </ul>
+<h1>Doctor Finder</h1>
+  <div class="map-container">
+    <div class="spinner" ng-if="ctrl.loading"></div>
+    <ui-gmap-google-map control="ctrl.map.control" center="ctrl.map.center" zoom="ctrl.map.zoom" options="ctrl.options" center="ctrl.currentLocation">
+      <div ng-repeat="doctor in ctrl.doctors">
+        <ui-gmap-marker idKey="$index" coords="{longitude: doctor.locations[0].address.longitude, latitude: doctor.locations[0].address.latitude}"></ui-gmap-marker>
+      </div>
+    </ui-gmap-google-map>
+  </div>
+  <div class="list-container">
+    <div class="doctor-list-item" ng-repeat="doctor in ctrl.doctors">
+      <div>
+        {{$index}}.
+        <div class="doctor-picture"></div>
+        <div class="doctor-address">
+          <span><a href="" ng-click="ctrl.centerMap(doctor.locations[0].address.longitude, doctor.locations[0].address.latitude)">{{doctor.name}}<span ng-repeat="degree in doctor.degrees">, {{degree}}</span></a></span><br>
+          {{doctor.locations[0].address.addr_line1}}  {{doctor.locations[0].address.addr_line2}}<br>
+          {{doctor.locations[0].address.city}}, {{doctor.locations[0].address.state_code}}  {{doctor.locations[0].address.postal_code}}
+        </div>
+      </div>
     </div>
   </div>
-  <div class="form-container col-lg-4">
-    <form>
-      <label>Wrong info? Enter your address here: </label>
-      <div class="col-sm-4 no-padding-left">
-        <input type="number"  class="form-control" placeholder="123" ng-model="address.streetNo">
-      </div>
-      <div class="col-sm-8 no-padding-left">
-        <input type="text" class="form-control" placeholder="Democracy Ave." ng-model="address.streetName">
-      </div>
-      <div class="col-sm-6 no-padding-left">
-        <input type="text" class="form-control" placeholder="Cincinnati" ng-model="address.city">
-      </div>
-      <div class="col-sm-6 no-padding-left">
-        <input type="text" ng-model="address.state" placeholder="Ohio" typeahead="state for state in states | filter:$viewValue" class="form-control">
-      </div>
-      <div class="col-sm-12 no-padding-left">
-        <button type="submit" class="btn btn-primary col-sm-12" ng-click="updateLocation()">Update</button>
-      </div>
-    </form>
-  </div>
-
 </div>
 
 <footer class="footer">

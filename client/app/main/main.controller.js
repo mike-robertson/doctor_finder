@@ -1,118 +1,66 @@
 'use strict';
 
 angular.module('mrWebdesignApp')
-  .controller('MainCtrl', ['$scope', '$http', 'socket', 'Auth', 'geoService', 'sunlightAPI',
-    function ($scope, $http, socket, Auth, geoService, sunlightAPI) {
-    $scope.loading = true;
+  .controller('MainCtrl', ['$timeout', '$http', 'GoogleMapApi'.ns(), 
+    function ($timeout, $http, GoogleMapApi) {
 
-    $scope.address = {
-      streetNo: '',
-      streetName: '',
-      city: '',
-      state: ''    
+    var ctrl = this;
+
+    // In case there is a delay, display loading gif for map.
+    ctrl.loading = true;
+
+    // Set our map to San Antonio center coords, zoom 13.
+    ctrl.map = {
+      center: {latitude: 40.1451, longitude: -29.4167 }, 
+      zoom: 13, 
+      bounds: {},
+      control: {}
     };
+    ctrl.options = {scrollwheel: false};
 
+    ctrl.doctors = [];
 
-    // Bind the Auth functions to scope so it is easy to access in our html.
-    $scope.isAdmin = Auth.isAdmin;
-    $scope.isLoggedIn = Auth.isLoggedIn;
+    // If this were an actual api call, we would use a get, so this is simulating getting the json in our local file.
+    $http.get('././assets/search.json')
+      .success(function(data, status, headers, config) {
+        // Turn off loading gif.
+        ctrl.loading = false;
 
-    // Get the promise from the geoService which retreives coords.
-    // TODO: add some error handling, such as making user input their address.
-    var promise = geoService.getCoords();
+        // Set our doctors array to the data in the json.
+        ctrl.doctors = data.professionals;
 
-    $scope.coordObj = '';
-    promise.then(function(coords) {
-      $scope.coordObj = coords;
-      console.log($scope.coordObj);
-    }, function(reason) {
-      console.log('Failed: ' + reason);
-      //handle the error here somehow, maybe pop up to make user enter their address
-    }, function(update) {
-      console.log('Update: ' + update);
+        // This is the latLong object which contains the current location's latitude and longitude.
+        ctrl.currentLocation = {
+          longitude: ctrl.doctors[0].locations[0].address.longitude,
+          latitude: ctrl.doctors[0].locations[0].address.latitude
+        };
+
+        // On the next $digest, we want to update the center to the first doctor's location.
+        $timeout(function() {
+          ctrl.map.control.refresh(ctrl.currentLocation);
+        });
+
+        console.log(ctrl.doctors);
+      })
+      .error(function(data, status, headers, config) {
+        alert('The data failed to load');
+        ctrl.loading = false;
+      });
+
+    GoogleMapApi.then(function() {
+      // Turn off the loading gif.
+      ctrl.loading = false;
     });
 
-    // Get the promise from the sunlightAPI service which retreives reps.
-    // TODO: add some error handling.
-    var promiseSunlight = promise.then(function(){
-      var promiseAPI = sunlightAPI.getReps($scope.coordObj);
-
-      promiseAPI.then(function(reps) {
-        $scope.repInfo = reps;
-        console.log($scope.repInfo);
-        $scope.repArray = reps.results;
-        $scope.loading = false;
-      }, function(reason) {
-        console.log('Failed: ' + reason);
-        $scope.loading = false;
-        //handle the error here somehow, maybe pop up to make user enter their address
-      }, function(update) {
-        console.log('Update: ' + update);
-      });
-    });
-
-    $scope.setState = function(newState) {
-      $scope.address.state = newState;
-    };
-
-    this.stringifyAddress = function() {
-      return $scope.address.streetNo + ' ' + $scope.address.streetName + ', '
-        + $scope.address.city + ', ' + $scope.address.state;
-    };
-
-    $scope.updateLocation = function() {
-      var geocoder = new google.maps.Geocoder();
-      geocoder.geocode({ 'address': $scope.address.streetNo + ' ' + $scope.address.streetName + ', '
-        + $scope.address.city + ', ' + $scope.address.state }, function(results, status) {
-        if (status == google.maps.GeocoderStatus.OK) {
-          $scope.coordObj = {
-            latitude: results[0].geometry.location.lat(),
-            longitude: results[0].geometry.location.lng()
-          };
-          console.log($scope.coordObj);
-          $scope.loading = true;
-          $scope.repArray = [];
-          var promiseUpdate = sunlightAPI.getReps($scope.coordObj);
-
-          promiseUpdate.then(function(reps) {
-            console.log('fulfilled promise');
-            $scope.repInfo = reps;
-            console.log($scope.repInfo);
-            $scope.repArray = reps.results;
-            $scope.loading = false;
-          }, function(reason) {
-            console.log('Failed: ' + reason);
-            $scope.loading = false;
-            //handle the error here somehow, maybe pop up to make user enter their address
-          }, function(update) {
-            console.log('Update: ' + update);
-          });
-        }
-        // Reset the address to a blank template again.
-        // Removed for now because it's annoying more than it's helpful.
-        // $scope.address = {
-        //   streetNo: '',
-        //   streetName: '',
-        //   city: '',
-        //   state: 'Alabama'
-        // };
+    // When this is called from ng-click on the doctor names, it will update the center of the map to their location.
+    ctrl.centerMap = function(lon, lat) {
+      ctrl.currentLocation = {
+        longitude: lon,
+        latitude: lat
+      };
+      $timeout(function() {
+        ctrl.map.control.refresh(ctrl.currentLocation);
       });
     };
-
-    $scope.states = [      
-      "Alabama",      "Alaska",      "Arizona",      "Arkansas",
-      "California",      "Colorado",      "Connecticut",      "Delaware",
-      "Florida",      "Georgia",      "Hawaii",      "Idaho",
-      "Illinois",      "Indiana",      "Iowa",      "Kansas",
-      "Kentucky",      "Louisiana",      "Maine",      "Maryland",
-      "Massachusetts",      "Michigan",      "Minnesota",      "Mississippi",
-      "Missouri",      "Montana",      "Nebraska",      "Nevada",
-      "New Hampshire",      "New Jersey",      "New Mexico",      "New York",
-      "North Carolina",      "North Dakota",      "Ohio",      "Oklahoma",
-      "Oregon",      "Pennsylvania",      "Rhode Island",      "South Carolina",
-      "South Dakota",      "Tennessee",      "Texas",      "Utah",
-      "Vermont",      "Virginia",      "Washington",      "West Virginia",
-      "Wisconsin",      "Wyoming"
-    ];
 
   }]);

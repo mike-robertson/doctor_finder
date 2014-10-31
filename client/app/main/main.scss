@@ -8,69 +8,55 @@ $mike-btn-primary-border:             darken($mike-btn-primary-bg, 5%) !default;
     color: #2B2B2E;
 }
 
+.angular-google-map-container { 
+    height: 300px; 
+}
+
 .btn-primary {
     @include button-variant($mike-btn-primary-color, $mike-btn-primary-bg, $mike-btn-primary-border);
 }
 
-.democrat {
-    background-color: #3333FF;
+.map-container {
+    padding: 20px;
 }
 
-.republican {
-    background-color: #FF3333;
+.doctor-picture {
+    content: url('/assets/images/smiley.jpeg');
+    max-width:75px;
+    max-height:75px;
+    padding:10px;
+    margin: 10px;
+    border: 1px solid black;
 }
 
-.square {
-    width: 40px;
-    height: 40px;
-    display: table;
-    margin: 0 10px 0 0;
-}
-
-.chamber {
-    text-transform: capitalize;
-}
-
-.well ul {
-    margin: 0;
-    padding: 0;
-}
-
-.well li {
-    font-size: 30px;
+ul {
     list-style: none;
 }
 
-#banner {
-    border-bottom: none;
-    margin-top: -20px;
+.container ul li{
+    display:inline;
 }
 
-#banner h1 {
-    font-size: 60px;
-    line-height: 1;
-    letter-spacing: -1px;
+.list-container {
+    height: 300px;
+    overflow-y: scroll;
 }
 
-.hero-unit {
-    position: relative;
-    padding: 30px 15px;
-    color: #2B2B2E;
-    text-align: center;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
-    z-index: 1;
+.doctor-list-item {
+    border: 1px solid #333;
+    border-radius: 2px;
+    margin: 5px 0;
+    padding: 5px 15px;
 }
 
-.hero-unit::before {
-    position: absolute;
-    content: "";
-    z-index: -1;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-image: url('/assets/images/stars_background.png');
-    opacity: .33;
+.doctor-address {
+    display:inline;
+    margin: 5px 0;
+}
+
+.doctor-list-item div {
+    display:inline-block;
+    vertical-align: middle;
 }
 
 .spinner {
@@ -81,32 +67,6 @@ $mike-btn-primary-border:             darken($mike-btn-primary-bg, 5%) !default;
     min-height: 100px;
     display: table;
     margin: 50px auto;
-}
-
-.medium-font {
-    font-size: 20px !important;
-}
-
-.form-container {
-    margin: 10px 0;
-}
-
-input {
-    margin:5px 0;
-}
-
-.no-padding-left {
-    padding-left: 0;
-}
-
-.ng-dirty.ng-invalid {
-    color: red;
-}
-
-.dropdown-menu {
-    max-height: 150px;
-    overflow-y: scroll;
-    overflow-x: hidden;
 }
 
 .footer {
