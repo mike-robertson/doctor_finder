@@ -1,8 +1,4 @@
-myCorpCongressman
-=================
-
-A work in progress web app which will show users their info on their congressmen/women, in particular info regarding their campaign contributions
-
+Doctor Finder
 
 How to set this up:
 
